@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Upload a Recipe — Karen's Flavor House</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ── Header ───────────────────────────────── -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="brand">
+        <svg width="44" height="44" viewBox="0 0 120 130" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect x="10" y="112" width="100" height="7" rx="3.5" fill="#8B5A3A"/>
+          <ellipse cx="60" cy="84" rx="28" ry="30" fill="#D4849A"/>
+          <ellipse cx="36" cy="88" rx="13" ry="22" fill="#C06B82" transform="rotate(-12 36 88)"/>
+          <ellipse cx="84" cy="88" rx="13" ry="22" fill="#C06B82" transform="rotate(12 84 88)"/>
+          <ellipse cx="60" cy="48" rx="24" ry="22" fill="#D4849A"/>
+          <ellipse cx="43" cy="32" rx="6" ry="10" fill="#C06B82" transform="rotate(-18 43 32)"/>
+          <ellipse cx="77" cy="32" rx="6" ry="10" fill="#C06B82" transform="rotate(18 77 32)"/>
+          <circle cx="48" cy="48" r="11" fill="#FFF8F4"/>
+          <circle cx="72" cy="48" r="11" fill="#FFF8F4"/>
+          <circle cx="48" cy="48" r="7"  fill="#3D2416"/>
+          <circle cx="72" cy="48" r="7"  fill="#3D2416"/>
+          <circle cx="51" cy="45" r="2.5" fill="white"/>
+          <circle cx="75" cy="45" r="2.5" fill="white"/>
+          <polygon points="60,53 54,61 66,61" fill="#D4956A"/>
+          <line x1="48" y1="112" x2="38" y2="119" stroke="#D4956A" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="48" y1="112" x2="52" y2="120" stroke="#D4956A" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="72" y1="112" x2="75" y2="120" stroke="#D4956A" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="72" y1="112" x2="82" y2="119" stroke="#D4956A" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+        <div>
+          <span class="brand-name">Karen's Flavor House</span>
+          <span class="brand-tagline">recipes from the heart</span>
+        </div>
+      </div>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html">← Back to Recipes</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ── Password Screen (shown first) ─────────── -->
+  <div class="upload-page" id="password-screen">
+    <div class="upload-card" style="max-width:400px; text-align:center;">
+      <svg width="64" height="64" viewBox="0 0 120 130" xmlns="http://www.w3.org/2000/svg"
+           style="margin:0 auto 1rem;" aria-hidden="true">
+        <ellipse cx="60" cy="84" rx="28" ry="30" fill="#D4849A"/>
+        <ellipse cx="60" cy="48" rx="24" ry="22" fill="#D4849A"/>
+        <circle cx="48" cy="48" r="11" fill="#FFF8F4"/>
+        <circle cx="72" cy="48" r="11" fill="#FFF8F4"/>
+        <circle cx="48" cy="48" r="7"  fill="#3D2416"/>
+        <circle cx="72" cy="48" r="7"  fill="#3D2416"/>
+        <circle cx="51" cy="45" r="2.5" fill="white"/>
+        <circle cx="75" cy="45" r="2.5" fill="white"/>
+        <polygon points="60,53 54,61 66,61" fill="#D4956A"/>
+      </svg>
+      <h1>Kitchen Entrance</h1>
+      <span class="sub">This area is just for Karen</span>
+      <div class="form-group" style="text-align:left;">
+        <label for="pw-input">Password</label>
+        <input id="pw-input" type="password" placeholder="Enter the secret ingredient…" autocomplete="current-password" />
+      </div>
+      <div id="pw-error" class="msg error" style="display:none;"></div>
+      <button class="btn-submit" id="pw-btn" onclick="checkPassword()">
+        Enter the Kitchen
+      </button>
+    </div>
+  </div>
+
+  <!-- ── Upload Form (hidden until password correct) ── -->
+  <div class="upload-page" id="upload-screen" style="display:none;">
+    <div class="upload-card">
+      <h1>Add a New Recipe</h1>
+      <span class="sub">Share something delicious</span>
+
+      <!-- Title -->
+      <div class="form-group">
+        <label for="title">Recipe Title *</label>
+        <input id="title" type="text" placeholder="e.g. Mama's Buttermilk Cornbread" maxlength="120" />
+      </div>
+
+      <!-- Category -->
+      <div class="form-group">
+        <label for="category">Category *</label>
+        <select id="category">
+          <option value="" disabled selected>Choose a category…</option>
+          <option>Breakfast</option>
+          <option>Appetizers</option>
+          <option>Soups &amp; Stews</option>
+          <option>Sides</option>
+          <option>Main Dishes</option>
+          <option>Desserts</option>
+          <option>Breads &amp; Biscuits</option>
+          <option>Drinks &amp; Punches</option>
+        </select>
+      </div>
+
+      <!-- Description -->
+      <div class="form-group">
+        <label for="description">Short Description (optional)</label>
+        <textarea id="description" placeholder="A little note about this recipe…" maxlength="300"></textarea>
+      </div>
+
+      <!-- File Drop -->
+      <div class="form-group">
+        <label>Recipe File * <span style="font-size:.8rem;font-weight:400;">(PDF, JPG, PNG — max 20 MB)</span></label>
+        <div class="file-drop" id="file-drop" onclick="document.getElementById('file-input').click()">
+          <input type="file" id="file-input" accept=".pdf,.jpg,.jpeg,.png,.webp" style="display:none" />
+          <p id="file-label">Click to choose a file, or drag and drop it here</p>
+          <p class="file-types">PDF, JPG, PNG, WEBP accepted</p>
+        </div>
+      </div>
+
+      <div id="form-msg" class="msg" style="display:none;"></div>
+
+      <button class="btn-submit" id="submit-btn" onclick="uploadRecipe()">
+        Add Recipe to Flavor House
+      </button>
+    </div>
+  </div>
+
+  <!-- ── Footer ────────────────────────────────── -->
+  <footer class="site-footer">
+    <p class="footer-name">Karen's Flavor House</p>
+    <p class="footer-note">Made with love in the South 🌸</p>
+  </footer>
+
+  <!-- ── Scripts ───────────────────────────────── -->
+  <script src="config.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    const { createClient } = supabase;
+    const db = createClient(CONFIG.supabaseUrl, CONFIG.supabaseKey);
+
+    let selectedFile = null;
+
+    // ── Password check ────────────────────────────
+    function checkPassword() {
+      const val = document.getElementById('pw-input').value;
+      const err = document.getElementById('pw-error');
+      if (val === CONFIG.uploadPassword) {
+        document.getElementById('password-screen').style.display = 'none';
+        document.getElementById('upload-screen').style.display   = 'flex';
+      } else {
+        err.textContent   = 'That password is not correct. Please try again.';
+        err.style.display = 'block';
+      }
+    }
+
+    // Allow pressing Enter on password field
+    document.getElementById('pw-input').addEventListener('keydown', e => {
+      if (e.key === 'Enter') checkPassword();
+    });
+
+    // ── File selection ────────────────────────────
+    const ACCEPTED = ['application/pdf','image/jpeg','image/png','image/webp'];
+    const MAX_MB   = 20;
+
+    document.getElementById('file-input').addEventListener('change', e => {
+      handleFile(e.target.files[0]);
+    });
+
+    const dropZone = document.getElementById('file-drop');
+    dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('drag-over'); });
+    dropZone.addEventListener('dragleave', ()  => dropZone.classList.remove('drag-over'));
+    dropZone.addEventListener('drop', e => {
+      e.preventDefault();
+      dropZone.classList.remove('drag-over');
+      handleFile(e.dataTransfer.files[0]);
+    });
+
+    function handleFile(file) {
+      if (!file) return;
+      if (!ACCEPTED.includes(file.type)) {
+        showMsg('error', 'Only PDF, JPG, PNG, or WEBP files are accepted.');
+        return;
+      }
+      if (file.size > MAX_MB * 1024 * 1024) {
+        showMsg('error', `File must be under ${MAX_MB} MB.`);
+        return;
+      }
+      selectedFile = file;
+      document.getElementById('file-label').textContent = '📄 ' + file.name;
+      document.getElementById('file-label').style.color = 'var(--rose-deep)';
+      document.getElementById('file-label').style.fontWeight = '600';
+      hideMsg();
+    }
+
+    // ── Upload ────────────────────────────────────
+    async function uploadRecipe() {
+      const title       = document.getElementById('title').value.trim();
+      const category    = document.getElementById('category').value;
+      const description = document.getElementById('description').value.trim();
+      const btn         = document.getElementById('submit-btn');
+
+      if (!title)        return showMsg('error', 'Please enter a recipe title.');
+      if (!category)     return showMsg('error', 'Please select a category.');
+      if (!selectedFile) return showMsg('error', 'Please attach a recipe file.');
+
+      btn.disabled = true;
+      btn.innerHTML = '<span class="spinner"></span> Uploading…';
+      hideMsg();
+
+      try {
+        // Build unique file path
+        const ext      = selectedFile.name.split('.').pop();
+        const safeName = title.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+        const filePath = `${Date.now()}-${safeName}.${ext}`;
+
+        // 1. Upload to Supabase Storage
+        const { error: storageErr } = await db.storage
+          .from('recipe-files')
+          .upload(filePath, selectedFile, { cacheControl: '3600', upsert: false });
+        if (storageErr) throw storageErr;
+
+        // 2. Insert record into recipes table
+        const { error: dbErr } = await db.from('recipes').insert({
+          title,
+          category,
+          description: description || null,
+          file_path:  filePath,
+          file_name:  selectedFile.name,
+        });
+        if (dbErr) throw dbErr;
+
+        showMsg('success', `"${title}" was added to the Flavor House! 🎉`);
+        // Reset form
+        document.getElementById('title').value       = '';
+        document.getElementById('category').value    = '';
+        document.getElementById('description').value = '';
+        document.getElementById('file-label').textContent = 'Click to choose a file, or drag and drop it here';
+        document.getElementById('file-label').style.color      = '';
+        document.getElementById('file-label').style.fontWeight = '';
+        document.getElementById('file-input').value = '';
+        selectedFile = null;
+
+      } catch (err) {
+        console.error(err);
+        showMsg('error', err.message || 'Upload failed. Please try again.');
+      } finally {
+        btn.disabled  = false;
+        btn.innerHTML = 'Add Recipe to Flavor House';
+      }
+    }
+
+    // ── Message helpers ───────────────────────────
+    function showMsg(type, text) {
+      const el = document.getElementById('form-msg');
+      el.className      = `msg ${type}`;
+      el.textContent    = text;
+      el.style.display  = 'block';
+    }
+    function hideMsg() {
+      document.getElementById('form-msg').style.display = 'none';
+    }
+  </script>
+</body>
+</html>
