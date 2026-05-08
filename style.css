@@ -75,7 +75,7 @@ button{ cursor: pointer; font-family: var(--body); }
     radial-gradient(ellipse 50% 60% at 80% 20%, rgba(212,132,154,.20) 0%, transparent 70%);
   pointer-events: none;
 }
-.hero-owl   { margin: 0 auto 1.25rem; width: 100px;
+.hero-owl   { margin: 0 auto 1.25rem; width: 130px; height: 130px; object-fit: contain;
               filter: drop-shadow(0 4px 12px rgba(168,85,112,.25));
               animation: sway 4s ease-in-out infinite; }
 @keyframes sway { 0%,100%{transform:rotate(-2deg)} 50%{transform:rotate(2deg)} }
