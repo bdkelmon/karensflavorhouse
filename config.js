@@ -11,5 +11,5 @@
 const CONFIG = {
   supabaseUrl: "https://whzqmmyshzujjbyargaw.supabase.co",
   supabaseKey: "sb_publishable_CE31PUEjP8Vbusy8czyyiw_Cxp1LQ9o",
-  uploadPassword: "Light_House_060493",
+  uploadPassword: "Apple_Desk_68",
 };
