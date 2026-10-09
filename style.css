@@ -274,3 +274,8 @@ button{ cursor: pointer; font-family: var(--body); }
   .hero             { padding: 2.5rem 1rem 2rem; }
   .upload-card      { padding: 1.5rem; }
 }
+
+/* Hide export labels above the original owl artwork. */
+img[src="images/logo.svg"] { clip-path: inset(12.3% 0 0); }
+img[src="images/icon_circle.svg"],
+img[src="images/icon_square.svg"] { clip-path: inset(6.84% 0 0); }
